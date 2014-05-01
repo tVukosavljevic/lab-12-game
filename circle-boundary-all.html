@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title></title>
+<style>
+#sketch {
+	border:1px solid #000;
+}
+</style>
+</head>
+<body>
+<canvas id="sketch" width="480" height="720">
+</canvas>
+<script>
+var sketch;
+var context;
+var circle;
+var dx = 4;
+var fps = 10;
+var animation
+var dy = 4
+
+document.addEventListener('DOMContentLoaded', main);
+
+function main() {
+	sketch = document.getElementById('sketch');
+	context = sketch.getContext("2d");
+
+	// store x and y values here... as well as radius or width and height
+	circle = {'x':25, 'y':sketch.offsetHeight / 2, 'r':25};
+	animation = setInterval(animate, fps);
+}
+
+function animate() {
+	// clear the screen
+	context.clearRect(0, 0, sketch.offsetWidth, sketch.offsetHeight);
+	draw_circle(circle.x, circle.y, circle.r)
+	circle.x = circle.x + dx;
+	if (circle.x>= 455) 
+	{dx = -4};
+	if (circle.x<= 9)
+	{dx = 4}
+	circle.y = circle.y + dy;
+	if (circle.y>=695)
+	{dy = -4}
+	if (circle.y<=25)
+	{dy = 4}
+}
+
+function draw_circle(x, y, r) {
+	context.beginPath();
+	context.arc(x, y, r, 0, 2 * Math.PI, true);
+	context.closePath();
+	context.fill();
+}
+
+</script>
+</body>
+</html>

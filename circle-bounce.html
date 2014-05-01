@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title></title>
+<style>
+#sketch {
+	border:1px solid #000;
+}
+</style>
+</head>
+<body>
+<canvas id="sketch" width="480" height="720">
+</canvas>
+<script>
+var sketch;
+var context;
+var circle;
+var acc = 0.1
+var fps = 10;
+var animation
+var dy = 0
+
+document.addEventListener('DOMContentLoaded', main);
+
+function main() {
+	sketch = document.getElementById('sketch');
+	context = sketch.getContext("2d");
+
+	circle = {'x':50, 'y':sketch.offsetHeight / 2, 'r':25};
+	animation = setInterval(animate, fps);
+}
+
+function animate() {
+	context.clearRect(0, 0, sketch.offsetWidth, sketch.offsetHeight);
+	draw_circle(circle.x, circle.y, circle.r)
+
+	circle.y = circle.y + dy;
+	dy = dy + acc
+	if (circle.y>= 695)
+
+	{dy = dy * -1
+	dy = dy * 0.8}
+}
+
+function draw_circle(x, y, r) {
+	context.beginPath();
+	context.arc(x, y, r, 0, 2 * Math.PI, true);
+	context.closePath();
+	context.fill();
+}
+
+</script>
+</body>
+</html>
